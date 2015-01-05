@@ -30,7 +30,7 @@ interacted with the API to alter the state of the remote Salesforce sandbox).
 It adds methods to Object:
 
     # Indicates the file and line number of this method invokation is a failure point
-     mark_failpoint
+    mark_failpoint
 
     # Like #mark_failpoint, but you can specify the point of failure manually -- useful if you have some piece of code
     # that is invoked several times by the algorithm, and you'd like to offer an opportunity to fail unique to the
@@ -60,6 +60,9 @@ Next, we can use #fail_by_trace to force a failure somewhere:
     Failpoints.fail_by_trace(trace, 1) do # Force failure at index 1 of trace
       MyAlgorithm.new.do_things
     end
+
+This will result in a FailpointMismatchException if the algorithm's execution diverges from what the trace is, or a
+FailpointAbortException if performing a normal abort at a failpoint location.
 
 In your test suite, you could increment the failure index to get complete coverage of all failpoints.  If you want an
 opinionated way to reduce the number of places to test, try Failpoints.minimum_test_indexes(trace).  This looks
