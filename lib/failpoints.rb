@@ -1,4 +1,5 @@
 require "failpoints/version"
+require "patches/object"
 
 module Failpoints
 
