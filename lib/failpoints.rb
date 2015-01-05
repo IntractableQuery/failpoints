@@ -1,6 +1,6 @@
 require "failpoints/version"
 
-class Failpoints
+module Failpoints
 
   class FailpointAbortException < Exception; end
   class FailpointMismatchException < Exception; end
